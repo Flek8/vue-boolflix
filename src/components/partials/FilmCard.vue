@@ -3,14 +3,15 @@
     <div class="card flip-card">
         <div class="flip-card-inner">
             <div class="flip-card-front">
-                <img class="copertina" :src="'https://image.tmdb.org/t/p/w342/' + film.poster_path">
+                <img class="copertina" v-if="film.poster_path" :src="'https://image.tmdb.org/t/p/w342/' + film.poster_path">
+                <img v-else class="fallback" src="../../assets/ciak.jpg">
             </div>
             <div class="flip-card-back">
-                <h4>Titolo: </h4><p> {{film.title}}</p> <br>
-                <h4>Titolo Originale: </h4><p> {{film.original_title}}</p> <br>
-                <h4>Trama: </h4><p> {{film.overview}}</p> <br>
+                <h5>Titolo: </h5><p> {{film.title}}</p> <br>
+                <h5>Titolo Originale: </h5><p> {{film.original_title}}</p> <br>
+                <h5>Trama: </h5><p> {{film.overview}}</p> <br>
                 <img class="flag" :src="require('../../assets/flags/' + film.original_language + '.svg')" alt=""> <br>
-                <h4>Voto: </h4> {{film.vote_average}}
+                <h5>Voto: </h5> <i v-for="i in 5" :key="i"  class="fa-star" :class="i < getVoto()? 'fa-solid':'fa-regular'"></i>
             </div>
         </div>
     </div>
@@ -23,6 +24,11 @@ export default {
     props: {
         film: Object
     },
+    methods: {
+        getVoto() {
+            return Math.ceil(this.film.vote_average / 2)
+        }
+    }
     
 }
 </script>
@@ -35,7 +41,6 @@ export default {
         background-color: black;
         margin: 10px;
         color: white;
-        border: 1px solid #f1f1f1;
         perspective: 1000px;
 
         &:hover .flip-card-inner {
@@ -68,7 +73,7 @@ export default {
             height: 100%;
         }
 
-        h4 {
+        h5 {
             display: inline-block;
             margin: 5px 2px;
         }
@@ -77,9 +82,17 @@ export default {
             height: 14px;
             margin: 10px 0;
         }
+        img.fallback {
+            width: 100%;
+            height: 100%;
+            object-fit: fill;
+        }
         p {
             font-size: 12px;
             display: inline-block;
+        }
+        .fa-star {
+            color: gold;
         }
     }    
 </style>
