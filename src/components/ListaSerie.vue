@@ -1,22 +1,22 @@
 <template>
   <section>
-      <FilmCard v-for="(film,index) in films" 
+    <SerieCard v-for="(serie,index) in series" 
                 :key="index"
-                :film="film"/>
+                :serie="serie"/>
   </section>
 </template>
 
 <script>
 
-import FilmCard from './partials/FilmCard.vue';
+import SerieCard from './partials/SerieCard.vue';
 
 export default {
-    name: 'ListaFilms',
+    name: 'ListaSerie',
     components: {
-        FilmCard
+        SerieCard
     },
     props: {
-        'films': Array
+      'series': Array
     }
 }
 </script>

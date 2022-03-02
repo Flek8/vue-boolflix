@@ -1,21 +1,25 @@
 <template>
     <main>
-        <MyCard v-for="(film,index) in listaFilms" 
-                :key="index"
-                :film="film"/>
+        <h2>Film</h2>
+        <ListaFilms :films="listaFilms"/>
+        <h2>Serie TV</h2>
+        <ListaSerie :series="listaSerie"/>
     </main>
 </template>
 
 <script>
-import MyCard from './partials/MyCard.vue';
+import ListaFilms from './ListaFilms.vue';
+import ListaSerie from './ListaSerie.vue'
 
 export default {
     name: 'MyMain',
     components: {
-        MyCard
+        ListaFilms,
+        ListaSerie
     },
     props: {
-        listaFilms: Array
+        listaFilms: Array,
+        listaSerie: Array
     }
 }
 </script>
@@ -24,7 +28,9 @@ export default {
     main {
         padding: 20px;
         background-color: rgb(100, 100, 100);
-        display: flex;
-        flex-wrap: wrap;
+
+        h2 {
+            color: white;
+        }
     }
 </style>
